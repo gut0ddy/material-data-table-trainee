@@ -1,0 +1,46 @@
+<mat-card>
+  <div class="table-container">
+    <!-- Campo de filtro -->
+    <mat-form-field>
+      <mat-label>Filtrar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Digite para filtrar">
+    </mat-form-field>
+
+    <!-- Tabela -->
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Definindo a coluna ID -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+
+      <!-- Definindo a coluna Nome -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+
+      <!-- Definindo a coluna Username -->
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+      </ng-container>
+
+      <!-- Cabeçalho da Tabela -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+      <!-- Corpo da Tabela -->
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+    <!-- Paginação -->
+    <mat-paginator [length]="totalElements"
+                   [pageSize]="pageSize"
+                   [pageIndex]="pageIndex"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   (page)="loadData($event)">
+    </mat-paginator>
+  </div>
+</mat-card>
